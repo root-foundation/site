@@ -11,6 +11,7 @@ const title = "RootNet";
 const description = "Unity in prosperity.";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://rootnet.com"), // Add metadataBase for proper image resolution
   title: "RootNet",
   description: "Prosperity through unity.",
   icons: {
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     description,
     images: [
       {
-        url: "/public/landing-share.png",
+        url: "/landing-share.png", // Fixed path - remove /public/ prefix
         width: 1200,
         height: 630,
       },
