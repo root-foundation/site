@@ -1,0 +1,156 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 340px;
+  height: 100vh;
+  background: #fbfbfb;
+  z-index: 100;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-inter);
+}
+
+/* Top Section */
+.topSection {
+  padding: 48px 48px 0 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Logo Section */
+.logoSection {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0.15rem;
+}
+
+.logoLink {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Divider */
+.divider {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Title Section */
+.titleSection {
+  margin-bottom: 0;
+}
+
+.titleButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  padding: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #000000;
+  line-height: 1.4;
+  display: block;
+  font-family: var(--font-inter, sans-serif);
+}
+
+.titleButton:hover {
+  /* No hover effect for title as specified */
+}
+
+/* Bottom Section */
+.bottomSection {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+  transition: box-shadow 0.2s ease;
+}
+
+.bottomSectionScrolled {
+  box-shadow: inset 0 4px 8px -4px rgba(0, 0, 0, 0.1);
+}
+
+.tocList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 1rem 48px 48px 48px;
+}
+
+.tocItem {
+  margin: 0;
+  padding: 0;
+}
+
+.tocItemH1 {
+  margin-bottom: 0.5rem;
+}
+
+.tocItemH1 .tocLink {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #6b7280;
+  padding: 0.5rem 0;
+}
+
+.tocItemH2 {
+  margin-bottom: 0rem;
+  margin-left: 0;
+}
+
+.tocItemH2 .tocLink {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.4);
+  padding: 0;
+}
+
+.tocLink {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  /* text-decoration: underline; */
+  transition: color 0.2s ease, font-weight 0.2s ease;
+  line-height: 1.4;
+  padding-left: 0;
+  padding-right: 0;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-inter, sans-serif);
+  letter-spacing: -0.25px;
+}
+
+.tocLink:hover {
+  color: #000000;
+  font-weight: 480;
+}
+
+.tocItemActive .tocLink {
+  color: #000000;
+  font-weight: 480;
+}
+
+/* Hide scrollbar */
+.bottomSection::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.bottomSection {
+  scrollbar-width: none;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .sidebar {
+    display: none;
+  }
+}
