@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import NavLink from "../components/NavLink";
 import { Logo } from "../components/Logo";
+import { HOME_PAGE_LINKS } from "../lib/links";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -25,32 +26,21 @@ export default function Home() {
         </div>
 
         <div className={styles.allLinks}>
-          <NavLink
-            href="/whitepaper"
-            variant="black"
-            className={styles.navbarDuplicateLink}
-          >
-            Whitepaper
-          </NavLink>
-          <NavLink
-            href="/ai"
-            variant="black"
-            className={styles.navbarDuplicateLink}
-          >
-            On AI
-          </NavLink>
-          <NavLink href="#presentation" variant="black">
-            Deck
-          </NavLink>
-          <NavLink href="/notify" isExternal variant="black">
-            Get notified
-          </NavLink>
-          <NavLink href="https://twitter.com" isExternal>
-            Follow
-          </NavLink>
-          <NavLink href="https://github.com" isExternal>
-            Source
-          </NavLink>
+          {HOME_PAGE_LINKS.map((link) => (
+            <NavLink
+              key={link.href}
+              href={link.href}
+              variant={link.isBlack ? "black" : "default"}
+              isExternal={link.isExternal}
+              className={
+                link.href === "/whitepaper" || link.href === "/ai"
+                  ? styles.navbarDuplicateLink
+                  : ""
+              }
+            >
+              {link.label}
+            </NavLink>
+          ))}
         </div>
       </div>
     </div>

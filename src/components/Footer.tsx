@@ -1,19 +1,21 @@
 import React from "react";
 import NavLink from "./NavLink";
+import { FOOTER_LINKS } from "../lib/links";
 
 export default function Footer() {
   return (
     <footer style={styles.footer}>
       <div style={styles.footerContent}>
-        <NavLink href="https://github.com" isExternal>
-          Source
-        </NavLink>
-        <NavLink href="/notify" isExternal variant="black">
-          Get notified
-        </NavLink>
-        <NavLink href="https://twitter.com" isExternal>
-          Follow
-        </NavLink>
+        {FOOTER_LINKS.map((link) => (
+          <NavLink
+            key={link.href}
+            href={link.href}
+            isExternal={link.isExternal}
+            variant={link.isBlack ? "black" : "default"}
+          >
+            {link.label}
+          </NavLink>
+        ))}
       </div>
     </footer>
   );

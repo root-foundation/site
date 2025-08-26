@@ -4,7 +4,7 @@ import EssayPage from "@/components/EssayPage";
 export default async function WhitepaperPage() {
   const content = await fetchMarkdownFromGitHub(GITHUB_RAW_URLS.whitepaper);
 
-  return <EssayPage title="Whitepaper" content={content} />;
+  return <EssayPage title="" content={content} />;
 }
 
 export const metadata = {

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "./Logo";
+import { LOGO_LINK } from "../lib/links";
 import styles from "./SideBar.module.css";
 
 interface TableOfContentsItem {
@@ -283,7 +284,7 @@ export default function SideBar({
             <div className={styles.topSection}>
               {/* Logo Section */}
               <div className={styles.logoSection}>
-                <Link href="/" className={styles.logoLink}>
+                <Link href={LOGO_LINK.href} className={styles.logoLink}>
                   <Logo size={28} color="#000000" />
                 </Link>
               </div>

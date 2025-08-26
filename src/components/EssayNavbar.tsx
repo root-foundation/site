@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Logo } from "./Logo";
+import { LOGO_LINK } from "../lib/links";
 
 interface EssayNavbarProps {
   onMenuToggle: () => void;
@@ -15,7 +16,7 @@ export default function EssayNavbar({
     <nav style={styles.navbar}>
       <div style={styles.navContent}>
         {/* Logo */}
-        <Link href="/" style={styles.logoLink}>
+        <Link href={LOGO_LINK.href} style={styles.logoLink}>
           <Logo size={28} color="#000000" />
         </Link>
 

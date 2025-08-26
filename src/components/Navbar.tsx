@@ -2,24 +2,29 @@ import React from "react";
 import Link from "next/link";
 import { Logo } from "./Logo";
 import NavLink from "./NavLink";
+import { MAIN_NAV_LINKS, LOGO_LINK } from "../lib/links";
 
 export default function Navbar() {
   return (
     <nav style={styles.navbar}>
       <div style={styles.navContent}>
         {/* Logo */}
-        <Link href="/" style={styles.logoLink}>
+        <Link href={LOGO_LINK.href} style={styles.logoLink}>
           <Logo size={28} color="#000000" />
         </Link>
 
         {/* Navigation Links for landing page */}
         <div style={styles.navLinks}>
-          <NavLink href="/whitepaper" variant="black">
-            Whitepaper
-          </NavLink>
-          <NavLink href="/ai" variant="black">
-            AI
-          </NavLink>
+          {MAIN_NAV_LINKS.map((link) => (
+            <NavLink
+              key={link.href}
+              href={link.href}
+              variant={link.isBlack ? "black" : "default"}
+              isExternal={link.isExternal}
+            >
+              {link.label}
+            </NavLink>
+          ))}
         </div>
       </div>
     </nav>
