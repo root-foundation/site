@@ -8,7 +8,7 @@ export default function Footer() {
         <NavLink href="https://github.com" isExternal>
           Source
         </NavLink>
-        <NavLink href="/notify" isExternal>
+        <NavLink href="/notify" isExternal variant="black">
           Get notified
         </NavLink>
         <NavLink href="https://twitter.com" isExternal>

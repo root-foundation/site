@@ -162,3 +162,97 @@ a.secondary {
     filter: invert();
   }
 }
+
+/* Custom styles for the new layout */
+.container {
+  min-height: 100vh;
+  background-color: #fcfcfc;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.figmaContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.figmaIframe {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 1200px;
+  height: 675px;
+  min-height: 500px;
+}
+
+.linksContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* Mobile-only logo container - hidden on desktop */
+.mobileLogoContainer {
+  display: none;
+}
+
+/* Container for all links */
+.allLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* Hide navbar duplicate links on desktop (they're already in the navbar) */
+.navbarDuplicateLink {
+  display: none;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .container {
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    min-height: 100vh;
+  }
+
+  /* Hide navbar on mobile - ONLY on landing page */
+  .container nav {
+    display: none !important;
+  }
+
+  .figmaContainer {
+    display: none;
+  }
+
+  .linksContainer {
+    align-items: center;
+    gap: 2rem;
+  }
+
+  /* Show mobile logo */
+  .mobileLogoContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Center all links on mobile */
+  .allLinks {
+    align-items: center;
+  }
+
+  /* Show navbar duplicate links on mobile */
+  .navbarDuplicateLink {
+    display: flex;
+  }
+}

@@ -99,3 +99,10 @@ a {
     height: auto;
   }
 }
+
+/* Landing page responsive styles */
+@media (max-width: 768px) {
+  .figma-container {
+    display: none !important;
+  }
+}

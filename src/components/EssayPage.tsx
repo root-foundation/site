@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./EssayPage.module.css";
 import SideBar from "./SideBar";
-import Navbar from "./Navbar";
+import EssayNavbar from "./EssayNavbar";
 import MermaidRenderer from "./MermaidRenderer";
 
 interface EssayPageProps {
@@ -47,7 +47,10 @@ export default function EssayPage({ title, content }: EssayPageProps) {
     >
       {/* Show navbar only on mobile */}
       {isMobile && (
-        <Navbar onMenuToggle={handleMenuToggle} isMenuOpen={isSidebarOpen} />
+        <EssayNavbar
+          onMenuToggle={handleMenuToggle}
+          isMenuOpen={isSidebarOpen}
+        />
       )}
 
       {/* Sidebar - desktop always visible, mobile overlay when open */}
