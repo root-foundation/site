@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "./Logo";
 import styles from "./SideBar.module.css";
 
@@ -13,9 +14,17 @@ interface TableOfContentsItem {
 
 interface SideBarProps {
   content: string;
+  isOpen?: boolean;
+  onClose?: () => void;
+  isMobile?: boolean;
 }
 
-export default function SideBar({ content }: SideBarProps) {
+export default function SideBar({
+  content,
+  isOpen = true,
+  onClose,
+  isMobile = false,
+}: SideBarProps) {
   const [tableOfContents, setTableOfContents] = useState<TableOfContentsItem[]>(
     []
   );
@@ -180,9 +189,10 @@ export default function SideBar({ content }: SideBarProps) {
   const handleClick = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      // Calculate offset to account for visual positioning
+      // Calculate offset to account for visual positioning and mobile navbar
+      const offset = isMobile ? 160 : 100; // Extra offset for mobile navbar
       const elementRect = element.getBoundingClientRect();
-      const offsetTop = elementRect.top + window.pageYOffset - 100; // 100px offset for better visual alignment
+      const offsetTop = elementRect.top + window.pageYOffset - offset;
 
       window.scrollTo({
         top: offsetTop,
@@ -195,6 +205,11 @@ export default function SideBar({ content }: SideBarProps) {
 
       // Immediately set active to provide instant feedback
       setActiveId(id);
+
+      // Close mobile sidebar after navigation
+      if (isMobile && onClose) {
+        onClose();
+      }
     }
   };
 
@@ -207,6 +222,11 @@ export default function SideBar({ content }: SideBarProps) {
     // Remove hash from URL when going back to top
     const newUrl = `${window.location.pathname}${window.location.search}`;
     window.history.pushState(null, "", newUrl);
+
+    // Close mobile sidebar after navigation
+    if (isMobile && onClose) {
+      onClose();
+    }
   };
 
   const handleTocScroll = (e: React.UIEvent<HTMLDivElement>) => {
@@ -214,65 +234,152 @@ export default function SideBar({ content }: SideBarProps) {
     setIsScrolled(scrollTop > 0);
   };
 
+  const handleBackdropClick = () => {
+    if (isMobile && onClose) {
+      onClose();
+    }
+  };
+
   if (tableOfContents.length === 0) {
     return null;
   }
 
   return (
-    <nav className={styles.sidebar}>
-      {/* Top Section */}
-      <div className={styles.topSection}>
-        {/* Logo Section */}
-        <div className={styles.logoSection}>
-          <Link href="/" className={styles.logoLink}>
-            <Logo size={28} color="#000000" />
-          </Link>
-        </div>
+    <>
+      <AnimatePresence>
+        {isMobile && isOpen && (
+          <motion.div
+            className={styles.backdrop}
+            onClick={handleBackdropClick}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          />
+        )}
+      </AnimatePresence>
 
-        {/* Divider */}
-        <div className={styles.divider}></div>
-
-        {/* Title Section */}
-        <div className={styles.titleSection}>
-          <button
-            className={styles.titleButton}
-            onClick={handleTitleClick}
-            type="button"
+      <AnimatePresence>
+        {(!isMobile || isOpen) && (
+          <motion.nav
+            className={`${styles.sidebar} ${
+              isMobile ? styles.sidebarMobile : ""
+            }`}
+            initial={isMobile ? { y: "100%", opacity: 0 } : false}
+            animate={isMobile ? { y: 0, opacity: 1 } : {}}
+            exit={isMobile ? { y: "100%", opacity: 0 } : {}}
+            transition={
+              isMobile
+                ? {
+                    type: "spring",
+                    damping: 25,
+                    stiffness: 300,
+                    opacity: { duration: 0.2 },
+                  }
+                : {}
+            }
           >
-            {title}
-          </button>
-        </div>
+            {/* Top Section */}
+            <div className={styles.topSection}>
+              {/* Logo Section */}
+              <div className={styles.logoSection}>
+                <Link href="/" className={styles.logoLink}>
+                  <Logo size={28} color="#000000" />
+                </Link>
+              </div>
 
-        {/* Divider */}
-        <div className={styles.divider}></div>
-      </div>
+              {/* Divider */}
+              <div className={styles.divider}></div>
 
-      {/* Bottom Section - Table of Contents */}
-      <div
-        className={`${styles.bottomSection} ${
-          isScrolled ? styles.bottomSectionScrolled : ""
-        }`}
-        onScroll={handleTocScroll}
-      >
-        <div className={styles.tocList}>
-          {tableOfContents.map((item) => (
-            <div
-              key={item.id}
-              className={`${styles.tocItem} ${styles.tocItemH2} ${
-                activeId === item.id ? styles.tocItemActive : ""
-              }`}
-            >
-              <button
-                className={styles.tocLink}
-                onClick={() => handleClick(item.id)}
-                type="button"
-              >
-                {item.text}
-              </button>
+              {/* Title Section */}
+              <div className={styles.titleSection}>
+                <button
+                  className={styles.titleButton}
+                  onClick={handleTitleClick}
+                  type="button"
+                >
+                  {title}
+                </button>
+              </div>
+
+              {/* Divider */}
+              <div className={styles.divider}></div>
             </div>
-          ))}
-        </div>
-      </div>
-    </nav>
+
+            {/* Bottom Section - Table of Contents */}
+            <div
+              className={`${styles.bottomSection} ${
+                isScrolled ? styles.bottomSectionScrolled : ""
+              }`}
+              onScroll={handleTocScroll}
+            >
+              <div className={styles.tocList}>
+                {tableOfContents.map((item) => (
+                  <div
+                    key={item.id}
+                    className={`${styles.tocItem} ${styles.tocItemH2} ${
+                      activeId === item.id ? styles.tocItemActive : ""
+                    }`}
+                  >
+                    <button
+                      className={styles.tocLink}
+                      onClick={() => handleClick(item.id)}
+                      type="button"
+                    >
+                      {item.text}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+
+      {/* Hide button overlay for mobile */}
+      <AnimatePresence>
+        {isMobile && isOpen && (
+          <motion.button
+            onClick={onClose}
+            initial={{ translateY: "100px", opacity: 0 }}
+            animate={{ translateY: "0px", opacity: 1 }}
+            exit={{ translateY: "100px", opacity: 0 }}
+            transition={{
+              type: "spring",
+              damping: 20,
+              stiffness: 500,
+              opacity: { duration: 0.15 },
+            }}
+            style={hideButtonStyles}
+            type="button"
+            aria-label="Hide sidebar"
+          >
+            Hide
+          </motion.button>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
+
+const hideButtonStyles: React.CSSProperties = {
+  position: "fixed",
+  bottom: "calc(2rem + env(safe-area-inset-bottom))", // 2rem from bottom edge
+  right: "2rem", // 2rem from right edge
+  zIndex: 250,
+  backgroundColor: "#000000",
+  color: "#ffffff",
+  border: "none",
+  borderRadius: "8px",
+  padding: "0.75rem 1.5rem",
+  fontSize: "14px",
+  fontWeight: "500",
+  cursor: "pointer",
+  boxShadow: "0 8px 24px rgba(0, 0, 0, 0.2)",
+  fontFamily: "var(--font-inter, sans-serif)",
+  transition: "background-color 0.2s ease, transform 0.1s ease",
+  minHeight: "44px", // Ensure minimum touch target size
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};

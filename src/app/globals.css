@@ -60,12 +60,21 @@ a {
   text-align: center;
   font-family: var(--font-inter, sans-serif) !important;
   max-width: 100%;
-  overflow-x: auto;
+  width: 100%;
+  overflow-x: auto; /* Allow horizontal scrolling for large diagrams */
+  box-sizing: border-box;
+  /* Prevent layout shifts during scroll */
+  contain: layout style;
+  will-change: transform;
 }
 
 .mermaid svg {
-  max-width: 100%;
   height: auto;
+  display: block;
+  margin: 0 auto;
+  /* Prevent layout recalculation during scroll */
+  contain: layout;
+  transform: translateZ(0); /* Force hardware acceleration */
 }
 
 /* Ensure mermaid diagrams are visible */
@@ -75,4 +84,18 @@ a {
 
 .mermaid:not([data-processed]) {
   visibility: hidden;
+}
+
+/* Mobile-specific Mermaid constraints */
+@media (max-width: 1024px) {
+  .mermaid {
+    overflow-x: auto; /* Allow scrolling on mobile for large diagrams */
+    max-width: calc(100vw - 2rem); /* Account for padding */
+  }
+
+  .mermaid svg {
+    max-width: none; /* Allow SVG to be its natural size */
+    min-width: 300px; /* Ensure minimum width for readability */
+    height: auto;
+  }
 }
