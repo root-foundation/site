@@ -1,0 +1,20 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .logo-circle {
+      stroke: #000000; /* Default: black for light mode */
+    }
+    @media (prefers-color-scheme: dark) {
+      .logo-circle {
+        stroke: #ffffff; /* White for dark mode */
+      }
+    }
+  </style>
+  <circle
+    class="logo-circle"
+    cx="16"
+    cy="16"
+    r="14.4"
+    fill="transparent"
+    stroke-width="3.2"
+  />
+</svg>

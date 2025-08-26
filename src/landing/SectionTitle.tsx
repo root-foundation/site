@@ -2,7 +2,7 @@ import React from "react";
 
 interface SectionTitleProps {
   children: React.ReactNode;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export default function SectionTitle({

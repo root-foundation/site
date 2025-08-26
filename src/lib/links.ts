@@ -38,12 +38,6 @@ export const HOME_PAGE_LINKS: LinkConfig[] = [
     isBlack: true,
   },
   {
-    label: "Get notified",
-    href: "",
-    isExternal: true,
-    isBlack: true,
-  },
-  {
     label: "Follow",
     href: "https://x.com/onrootnet",
     isExternal: true,

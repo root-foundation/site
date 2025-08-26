@@ -7,11 +7,10 @@ import EssayNavbar from "./EssayNavbar";
 import MermaidRenderer from "./MermaidRenderer";
 
 interface EssayPageProps {
-  title: string;
   content: string;
 }
 
-export default function EssayPage({ title, content }: EssayPageProps) {
+export default function EssayPage({ content }: EssayPageProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
