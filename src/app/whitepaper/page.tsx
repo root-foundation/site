@@ -8,6 +8,7 @@ export default async function WhitepaperPage() {
 }
 
 export const metadata = {
+  metadataBase: new URL("https://rootnet.com"),
   title: "RootNet Whitepaper",
   description: "Prosperity through unity.",
   openGraph: {
@@ -15,7 +16,7 @@ export const metadata = {
     description: "Prosperity through unity.",
     images: [
       {
-        url: "/public/whitepaper-share.png", // 1200x630 or 1200x675
+        url: "/whitepaper-share.png", // 1200x630 or 1200x675
         width: 1200,
         height: 630,
       },
