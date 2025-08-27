@@ -13,7 +13,7 @@ export const MAIN_NAV_LINKS: LinkConfig[] = [
     isBlack: true,
   },
   {
-    label: "AI",
+    label: "AI Essay",
     href: "/ai",
     isBlack: true,
   },
@@ -27,7 +27,7 @@ export const HOME_PAGE_LINKS: LinkConfig[] = [
     isBlack: true,
   },
   {
-    label: "On AI",
+    label: "AI Essay",
     href: "/ai",
     isBlack: true,
   },
