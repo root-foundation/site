@@ -1,7 +1,7 @@
 .container {
   min-height: 100vh;
   line-height: 1.6;
-  font-family: var(--font-inter);
+  font-family: var(--font-inter, sans-serif);
   color: #333;
   display: flex;
 }
