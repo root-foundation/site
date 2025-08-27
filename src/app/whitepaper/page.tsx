@@ -12,7 +12,7 @@ const description = "Prosperity through unity.";
 const url = "/whitepaper-share.png";
 
 export const metadata = {
-  metadataBase: new URL("https://rootnet.com"),
+  metadataBase: new URL("https://onroot.net"),
   title,
   description,
   openGraph: {

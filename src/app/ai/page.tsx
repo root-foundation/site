@@ -12,7 +12,7 @@ const description = "How AI changes the shape of our economy.";
 const url = "/ai-share.png";
 
 export const metadata = {
-  metadataBase: new URL("https://rootnet.com"),
+  metadataBase: new URL("https://onroot.net"),
   title,
   description,
   openGraph: {
