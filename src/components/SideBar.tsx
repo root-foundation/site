@@ -200,10 +200,6 @@ export default function SideBar({
         behavior: "smooth",
       });
 
-      // Update the URL with the hash
-      const newUrl = `${window.location.pathname}${window.location.search}#${id}`;
-      window.history.pushState(null, "", newUrl);
-
       // Immediately set active to provide instant feedback
       setActiveId(id);
 
@@ -219,10 +215,6 @@ export default function SideBar({
       top: 0,
       behavior: "smooth",
     });
-
-    // Remove hash from URL when going back to top
-    const newUrl = `${window.location.pathname}${window.location.search}`;
-    window.history.pushState(null, "", newUrl);
 
     // Close mobile sidebar after navigation
     if (isMobile && onClose) {
