@@ -9,6 +9,7 @@ export default async function AIPage() {
 
 const title = "RootNet: AI changes the shape of our economy";
 const description = "How AI changes the shape of our economy.";
+const url = "/ai-share.png";
 
 export const metadata = {
   metadataBase: new URL("https://rootnet.com"),
@@ -19,10 +20,16 @@ export const metadata = {
     description,
     images: [
       {
-        url: "/ai-share.png", // 1200x630 or 1200x675
+        url, // 1200x630 or 1200x675
         width: 1200,
         height: 630,
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: [url],
   },
 };

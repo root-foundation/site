@@ -28,8 +28,17 @@ export const metadata: Metadata = {
         url: "/landing-share.png", // Fixed path - remove /public/ prefix
         width: 1200,
         height: 630,
+        alt: "RootNet",
       },
     ],
+
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/landing-share.png"],
   },
 };
 

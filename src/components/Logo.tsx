@@ -87,7 +87,7 @@ const LogoWithText: React.FC<LogoWithTextProps> = ({ color = "white" }) => {
     <Link href="/" style={styles.logoWithTextLink}>
       <div style={styles.logoWithTextContainer}>
         <Logo size={16} color={color} />
-        <span style={{ ...styles.logoText, color }}>PersonalTokenNet</span>
+        <span style={{ ...styles.logoText, color }}>RootNet</span>
       </div>
     </Link>
   );

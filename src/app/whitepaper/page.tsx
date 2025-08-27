@@ -7,19 +7,29 @@ export default async function WhitepaperPage() {
   return <EssayPage content={content} />;
 }
 
+const title = "RootNet Whitepaper";
+const description = "Prosperity through unity.";
+const url = "/whitepaper-share.png";
+
 export const metadata = {
   metadataBase: new URL("https://rootnet.com"),
-  title: "RootNet Whitepaper",
-  description: "Prosperity through unity.",
+  title,
+  description,
   openGraph: {
-    title: "RootNet Whitepaper",
-    description: "Prosperity through unity.",
+    title,
+    description,
     images: [
       {
-        url: "/whitepaper-share.png", // 1200x630 or 1200x675
+        url, // 1200x630 or 1200x675
         width: 1200,
         height: 630,
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: [url],
   },
 };
