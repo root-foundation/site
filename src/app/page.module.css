@@ -148,7 +148,6 @@ a.secondary {
 
 /* Custom styles for the new layout */
 .container {
-  min-height: 100vh;
   background-color: #fcfcfc;
   display: flex;
   flex-direction: column;
@@ -204,8 +203,10 @@ a.secondary {
   .container {
     align-items: center;
     justify-content: center;
-    gap: 2rem;
-    min-height: 100vh;
+    gap: 1.5rem;
+    height: 100svh;
+    padding: 1rem;
+    box-sizing: border-box;
   }
 
   /* Hide navbar on mobile - ONLY on landing page */
