@@ -102,10 +102,52 @@ export async function fetchMarkdownFromGitHub(url: string): Promise<string> {
         const diagramId = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
         return `<div class="mermaid" id="${diagramId}">${text}</div>`;
       }
-      // Default code block rendering
-      return `<pre><code class="${
+      // Default code block rendering with proper mobile constraints
+      return `<pre style="max-width: 100%; overflow-x: auto; box-sizing: border-box;"><code class="${
         lang ? `language-${lang}` : ""
       }">${text}</code></pre>`;
+    };
+
+    // Override table renderer to output plain text (terminal-style)
+    renderer.table = function ({ header, rows }) {
+      // Get the raw text from header and rows
+      const headerTexts = header.map((cell) =>
+        this.parser.parseInline(cell.tokens)
+      );
+      const rowTexts = rows.map((row) =>
+        row.map((cell) => this.parser.parseInline(cell.tokens))
+      );
+
+      // Calculate column widths
+      const colWidths = headerTexts.map((header, i) => {
+        const maxRowWidth = Math.max(
+          ...rowTexts.map((row) => row[i]?.length || 0)
+        );
+        return Math.max(header.length, maxRowWidth);
+      });
+
+      // Create the table string
+      let tableStr = "";
+
+      // Header row
+      const headerRow = headerTexts
+        .map((text, i) => text.padEnd(colWidths[i]))
+        .join(" | ");
+      tableStr += headerRow + "\n";
+
+      // Separator row
+      const separator = colWidths.map((width) => "-".repeat(width)).join("-|-");
+      tableStr += separator + "\n";
+
+      // Data rows
+      rowTexts.forEach((row) => {
+        const rowStr = row
+          .map((text, i) => (text || "").padEnd(colWidths[i]))
+          .join(" | ");
+        tableStr += rowStr + "\n";
+      });
+
+      return `<pre style="font-family: monospace; white-space: pre; overflow-x: auto; background: #f5f5f5; padding: 1rem; border-radius: 4px; margin: 1rem 0;">${tableStr}</pre>`;
     };
 
     // Use the footnote extension

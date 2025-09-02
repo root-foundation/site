@@ -197,6 +197,9 @@
   border-radius: 6px;
   overflow-x: auto;
   margin: 24px 0;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Image styles - constrain images to container width */
@@ -337,6 +340,15 @@
   text-decoration: underline;
 }
 
+.content pre code {
+  background: #fafafa;
+  padding: 1rem;
+  white-space: pre;
+  overflow-x: auto;
+  display: block;
+  border-radius: 6px;
+}
+
 /* Back-reference links in footnotes */
 .content a[href^="#fnref:"] {
   text-decoration: none;
@@ -367,6 +379,10 @@
     max-width: 100vw;
     overflow-x: hidden;
   }
+
+  .content pre {
+    width: calc(100vw - 32px);
+  }
 }
 
 @media (max-width: 768px) {
@@ -386,6 +402,15 @@
 
   .article {
     padding: 2rem;
+  }
+
+  /* Code block mobile adjustments */
+  .content pre {
+    padding: 12px;
+    margin: 16px 0;
+    font-size: 13px;
+    overflow-x: auto;
+    max-width: calc(100vw - 4rem); /* Account for main padding */
   }
 
   /* Tablet table adjustments */
@@ -416,6 +441,16 @@
 
   .article {
     padding: 1.5rem;
+  }
+
+  /* Code block small mobile adjustments */
+  .content pre {
+    padding: 8px;
+    margin: 12px 0;
+    font-size: 12px;
+    overflow-x: auto;
+    max-width: calc(100vw - 3rem); /* Account for main padding */
+    border-radius: 4px;
   }
 
   /* Mobile table adjustments */
