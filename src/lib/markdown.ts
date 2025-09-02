@@ -130,4 +130,6 @@ export const GITHUB_RAW_URLS = {
   whitepaper:
     "https://raw.githubusercontent.com/root-foundation/root/main/whitepaper.md",
   ai: "https://raw.githubusercontent.com/root-foundation/root/main/ai.md",
+  homan:
+    "https://raw.githubusercontent.com/root-foundation/root/refs/heads/main/tokens/%40homan.md",
 } as const;
